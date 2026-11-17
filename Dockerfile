@@ -35,7 +35,8 @@ RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
 # 复制构建产物
-COPY --from=builder /app/public ./public
+# Copy the public directory only if it exists.
+# The application can run without it when no public assets are used.
 
 # 设置正确的权限
 RUN mkdir .next
