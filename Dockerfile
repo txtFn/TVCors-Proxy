@@ -9,10 +9,7 @@ WORKDIR /app
 
 # 复制包管理文件
 COPY package.json package-lock.json* ./
-RUN \
-  if [ -f package-lock.json ]; then npm ci --only=production; \
-  else echo "Warning: Lockfile not found. It is recommended to commit lockfiles to version control." && npm install --only=production; \
-  fi
+RUN npm ci --include=dev
 
 # 构建阶段
 FROM base AS builder
